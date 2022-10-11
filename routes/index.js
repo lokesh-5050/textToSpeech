@@ -7,7 +7,7 @@ const userModel = require("../models/users")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render("index")
+  res.render("login")
 });
 
 module.exports = router;
