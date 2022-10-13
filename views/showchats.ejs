@@ -30,20 +30,20 @@
         <h4>online Users <span id="onlineusers"></span></h4>
 
         <div class="chats_with">
-          <% frnds.forEach(frnd => {
-            
-          }); %> 
-          <div class="chats">
-            <img class="frnd_img" src="../images/google.png" alt="" />
-            <div class="from_content">
-              <h3>Lokesh</h3>
-              <h6>hey! , How are you?</h6>
+          <% frnds.forEach(frnd => {%>
+
+            <div class="chats">
+              <img class="frnd_img" src="../images/google.png" alt="" />
+              <div class="from_content">
+                <h3><%= frnd.username %> </h3>
+                <h6>hey! , How are you?</h6>
+              </div>
+              <div class="chat_time">
+                <h6>12.22pm</h6>
+                <h3>.</h3>
+              </div>
             </div>
-            <div class="chat_time">
-              <h6>12.22pm</h6>
-              <h3>.</h3>
-            </div>
-          </div>
+          <%}); %> 
           
         </div>
       </div>
