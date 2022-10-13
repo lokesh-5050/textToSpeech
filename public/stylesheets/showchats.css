@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,400;1,200&display=swap");
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: Montserrat;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#main {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 1vmax 1vmax;
+  display: flex;
+}
+.left_section {
+  width: 25vmax;
+  height: 100%;
+  background-color: palegoldenrod;
+}
+.left_section a {
+  display: block;
+}
+.chat_left_footer {
+  width: 25vmax;
+  height: 4vmax;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user_dp {
+  width: 3.5vmax;
+  height: 3.5vmax;
+  border-radius: 50%;
+  background-color: yellow;
+}
+.user_dp a {
+  display: block;
+}
+.app_name {
+  width: 8vmax;
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 8vmax;
+}
+.app_name img {
+  width: 2vmax;
+}
+#user_settings img {
+  width: 2vmax;
+  margin-right: 1vmax;
+}
+/* search_bar */
+#serach_bar_form {
+  display: flex;
+}
+#search_bar {
+  width: 23vmax;
+  height: 2.3vmax;
+  border-radius: 2vmax;
+  outline: none;
+  border: none;
+  padding: 0 4vmax;
+  margin-top: 1.5vmax;
+  margin-left: 1vmax;
+}
+.search_icon {
+  height: 1vmax;
+  position: relative;
+  top: 2.2vmax;
+  right: 21vmax;
+}
+
+.chats_with {
+  width: 25vmax;
+  max-height: 43.3vmax;
+  background-color: skyblue;
+  margin-top: 2vmax;
+  overflow-y: auto;
+  gap: 1vmax;
+  display: flex;
+  flex-direction: column;
+}
+.chats {
+  width: 98%;
+  max-height: 4vmax;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.frnd_img {
+  width: 3.5vmax;
+  height: 3.5vmax;
+  border-radius: 2vmax;
+  background-color: yellow;
+}
+.from_content {
+  width: 10vmax;
+  height: 100%;
+  background-color: purple;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 4vmax;
+}
+
+#right_section {
+  width: 75vmax;
+  height: 100%;
+  background-color: rgba(152, 251, 152, 0.959);
+  /* padding: 0 2vmax; */
+}
+.right_chat_footer {
+  width: 73vmax;
+  height: 4vmax;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1vmax;
+}
+.frnd_dp {
+  width: 40px;
+  height: 40px;
+  background-color: yellow;
+  border-radius: 50%;
+}
+.frnd_name {
+  position: relative;
+  right: 25vmax;
+}
+.chat_search {
+  height: 1.6vmax;
+  margin-right: 2vmax;
+}
+.all_chats_content {
+  width: 100%;
+  max-height: 45vmax;
+  background-color: palevioletred;
+  margin-top: 1vmax;
+  padding: 0.5vmax 1vmax;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1vmax;
+  
+}
+.msg{
+    width: 100%;
+    min-height: 4vh;
+    background-color: aqua;
+
+}
+/* message form below */
+#send_msg_form {
+  position: relative;
+}
+#type_msg {
+  width: 62vmax;
+  height: 3.01vmax;
+  outline: none;
+  border: none;
+  padding: 0 2vmax;
+  margin-left: 1vmax;
+  border-radius: 5px;
+}
+.upload_opt {
+  width: 2.5vmax;
+  height: 2.5vmax;
+  position: absolute;
+  right: 6.5vmax;
+  top: 0.25vmax;
+}
+
+.send_msg{
+    width: 2vmax;
+    margin-left: 5.5vmax;
+    position: absolute;
+    top: 0.5vmax;
+}
+
+
+/* on hover side menu */
+#side_menu{
+    width:15vmax;
+    height: 53vmax;
+    background-color: skyblue;
+    position: absolute;
+    top: 1vmax;
+    left: -15vmax;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) 2s;
+
+}

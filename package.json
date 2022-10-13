@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "server": "nodemon"
   },
   "dependencies": {
     "accessibility": "^4.4.1",
@@ -13,6 +14,7 @@
     "dotenv": "^16.0.3",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-partials": "^0.3.0",
     "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
     "moment": "^2.29.4",

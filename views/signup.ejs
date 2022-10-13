@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <link rel="stylesheet" href="../stylesheets/signup.css">
+</head>
+<body>
+    <div id="main">
+       <% include ../views/partials/footer.ejs %> 
+
+        <div class="centre">
+            <div class="notch">
+                <img id="google_logo" src="../images/google.png" alt="">
+                <h5>Signup with Google</h5>
+            </div>
+
+            <div class="name_form">
+
+                <form id="login_form" action="" method="post">
+                    <h4>Name</h4>
+                    <input type="text" name="name" id="name_login_input" placeholder="Type your name here...">
+
+                    <h4 id="email_login_input">Email</h4>
+                    <input type="text" name="email" id="name_login_input" placeholder="Type your email here...">
+                    
+                    <h4 id="email_login_input">PhoneNo</h4>
+                    <input type="number" name="phoneNo" id="name_login_input" placeholder="Type your phoneNo here...">
+                    
+                    <h4 id="email_login_input">Age</h4>
+                    <input type="number" name="age" id="name_login_input" placeholder="Type your age here...">
+                    
+                    <input type="submit" id="submit_login_btn" value="Signup">
+                   
+                </form>
+               
+
+
+            </div>
+        </div>
+
+        <!-- left illustration -->
+
+        <!-- <div class="left_illus"> -->
+            <img class="left_illus" src="../images/man-gfb9167246_1280.png" alt="">
+            <img class="right_illus" src="../images/istockphoto-1127886638-612x612.jpg" alt="">
+        <!-- </div> -->
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,400;1,200&display=swap");
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: Montserrat;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#main {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 1vmax 1vmax;
+}
+
+.footer {
+  width: 100%;
+  height: 3vmax;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  width: 11vmax;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo h2 {
+  font-family: "Montserrat", sans-serif;
+}
+.logo img {
+  width: 2vmax;
+  height: 2vmax;
+  margin-left: 1vmax;
+}
+.right_sec {
+  width: 11vmax;
+  height: 100%;
+  /* background-color: palevioletred; */
+  display: flex;
+  gap: 3vmax;
+}
+.right_sec a{
+    color: #000;
+}
+.about img {
+  width: 3vmax;
+  height: 2vmax;
+  object-fit: contain;
+}
+.about h4 {
+  font-family: Montserrat;
+  margin-top: -0.2vmax;
+  font-size: 1vmax;
+}
+.about_settings {
+  margin-left: -0.5vmax;
+  display: block;
+  margin-top: 0.02vmax;
+}
+.centre {
+  width: 25vmax;
+  height: 45vmax;
+  background-color: #000;
+  position: absolute;
+  border-radius: 2vmax;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  padding: 0 2vmax;
+}
+.notch {
+  width: 16vmax;
+  height: 3vmax;
+  background-color: rgb(47, 158, 202);
+  border-radius: 3vmax;
+  margin-left: 3.1vmax;
+  margin-top: 1.5vmax;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.notch h5 {
+  font-family: montserrat;
+  margin-right:2vmax ;
+}
+#google_logo{
+    width: 2vmax;
+    height: 2vmax;
+
+
+
+}
+.name_form {
+  color: #fff;
+  margin-top: 3vmax;
+}
+.name_form h4 a {
+  font-size: 0.9vmax;
+  margin-left: 11vmax;
+  display: block;
+  color: #fff;
+  margin-top: 0.9vmax;
+}
+.name_form hr {
+  margin-top: 1.5vmax;
+  height: 0.1vmax;
+}
+
+/* login form  below */
+#login_form input {
+    outline: none;
+}
+#name_login_input {
+  margin-top: 0.5vmax;
+  width: 20vmax;
+  height: 3vmax;
+  border-radius: 2vmax;
+  padding: 0 2vmax;
+}
+#email_login_input {
+  margin-top: 2vmax;
+}
+#submit_login_btn {
+    width: 8vmax;
+    height: 3vmax;
+    border-radius: 3vmax;
+    margin-top: 2vmax;
+    margin-left: 6vmax;
+    background-color: rgb(47, 158, 202);
+  }
+
+
+
+
+.left_illus {
+  width: 18vmax;
+  height: 33vmax;
+  background-color: #fff;
+  position: absolute;
+  left: -0.3vmax;
+  transform: scale(-1,1);
+  bottom: 0%;
+}
+
+.right_illus{
+    width: 30vmax;
+    height: 30vmax;
+    position: absolute;
+    right: 0%;
+    top: 15vmax;
+
+}

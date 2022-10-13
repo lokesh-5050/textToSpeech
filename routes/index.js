@@ -7,7 +7,7 @@ passport.use(new localStrategy({usernameField:'email'}, userModel.authenticate()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render("login")
+  res.render("showchats")
 });
 
 module.exports = router;
