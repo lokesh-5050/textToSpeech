@@ -94,7 +94,11 @@ body {
 }
 .name_form {
   color: #fff;
-  margin-top: 3vmax;
+  margin-top: 2vmax;
+}
+#signupLogin{
+  width: 15vmax;
+  margin-left: 3vmax;
 }
 .name_form h4 a {
   font-size: 0.9vmax;
@@ -141,10 +145,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.9vmax;
   margin-left: 2vmax;
 }
-
+#withGo{
+  margin-top: 2vmax;
+}
+#withG{
+  margin-top: 1vmax;
+}
 .left_illus {
   width: 18vmax;
   height: 33vmax;

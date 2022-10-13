@@ -1,5 +1,10 @@
 const passport = require("passport");
 const userModel = require("../models/users");
+const otherUser = require("../models/otherUsers")
+const io = require("socket.io")
+
+
+
 
 //userCreation API function
 exports.userCreation = async (req, res, next) => {
@@ -11,7 +16,7 @@ exports.userCreation = async (req, res, next) => {
   });
 
   userModel.register(newUser, req.body.password).then(function () {
-    passport.authenticate("local")(req, res, function () {
+    passport.authenticate("local")(req, res, function (err) {
       res.redirect("/");
     });
   });
@@ -25,8 +30,12 @@ exports.userCreation = async (req, res, next) => {
   function (req, res, next) {};
 
 //Api func of chats page
-exports.chatsPage = (req, res, next) => {
-  res.render("showchats");
+exports.chatsPage = async(req, res, next) => {
+  let loggedInUser = await userModel.findOne({_id:req.user._id})
+  console.log(loggedInUser);
+
+  let otherUsersExceptMe = await otherUser.find({_id:{ $ne: loggedInUser._id}})
+  res.render("showchats" , {user:loggedInUser , frnds:otherUsersExceptMe});
 };
 
 //Api func of signup page

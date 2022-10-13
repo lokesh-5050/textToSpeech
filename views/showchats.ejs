@@ -10,23 +10,29 @@
   <body>
     <div id="main">
       <div class="left_section">
+        <h4 id="userId" style="display: none;"><%= user._id %></h4>
+        <h4 id="userName" style="display: none;"><%= user.username %></h4>
         <% include ../views/partials/chatfooter.ejs %>
 
         <div id="side_menu">
             <h1 id="remove">X</h1>
         </div>
-
+        
         <!-- search bar form -->
         <form id="serach_bar_form" action="">
           <input
-            type="text"
-            id="search_bar"
-            value="Search or start a new chat"
+          type="text"
+          id="search_bar"
+          value="Search or start a new chat"
           />
           <img class="search_icon" src="../images/searchnormal1.png" alt="" />
         </form>
+        <h4>online Users <span id="onlineusers"></span></h4>
 
         <div class="chats_with">
+          <% frnds.forEach(frnd => {
+            
+          }); %> 
           <div class="chats">
             <img class="frnd_img" src="../images/google.png" alt="" />
             <div class="from_content">
@@ -38,17 +44,7 @@
               <h3>.</h3>
             </div>
           </div>
-          <div class="chats">
-            <img class="frnd_img" src="../images/google.png" alt="" />
-            <div class="from_content">
-              <h3>Lokesh</h3>
-              <h6>hey! , How are you?</h6>
-            </div>
-            <div class="chat_time">
-              <h6>12.22pm</h6>
-              <h3>.</h3>
-            </div>
-          </div>
+          
         </div>
       </div>
 
@@ -98,5 +94,29 @@
       </div>
     </div>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="../javascripts/showchats.js"></script>
+  <script>
+    var socket = io();
+    var userName = ""
+    var userId = ""
+    var username = document.getElementById("userName").innerHTML
+    var userid = document.getElementById("userId").innerHTML
+    // console.log(username);
+    userName = username;
+    userId = userid;
+    // console.log(userName + "../loggedInUser");
+    // console.log(userId + "../loggedInUser");
+
+    socket.emit("connected_userId" , {userId , userName});
+
+    //listening online users
+    var onlineusers = document.querySelector("#onlineusers")
+    socket.on("online_users" , (data)=>{
+      onlineusers.innerHTML = data.socketId.length
+      console.log(data);
+    })
+    
+    
+  </script>
 </html>

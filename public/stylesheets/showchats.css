@@ -24,7 +24,7 @@ body {
 .left_section {
   width: 25vmax;
   height: 100%;
-  background-color: palegoldenrod;
+  background-color: rgb(206, 205, 205);
 }
 .left_section a {
   display: block;
@@ -32,7 +32,7 @@ body {
 .chat_left_footer {
   width: 25vmax;
   height: 4vmax;
-  background-color: red;
+  background-color: rgb(165, 165, 165);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,14 +41,14 @@ body {
   width: 3.5vmax;
   height: 3.5vmax;
   border-radius: 50%;
-  background-color: yellow;
+  background-color: rgb(63, 63, 62);
 }
 .user_dp a {
   display: block;
 }
 .app_name {
   width: 8vmax;
-  background-color: orange;
+  /* background-color: orange; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -85,7 +85,7 @@ body {
 .chats_with {
   width: 25vmax;
   max-height: 43.3vmax;
-  background-color: skyblue;
+  /* background-color: skyblue; */
   margin-top: 2vmax;
   overflow-y: auto;
   gap: 1vmax;
@@ -95,7 +95,7 @@ body {
 .chats {
   width: 98%;
   max-height: 4vmax;
-  background-color: red;
+  background-color: rgb(109, 106, 106);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -104,12 +104,12 @@ body {
   width: 3.5vmax;
   height: 3.5vmax;
   border-radius: 2vmax;
-  background-color: yellow;
+  background-color: rgb(126, 126, 126);
 }
 .from_content {
   width: 10vmax;
   height: 100%;
-  background-color: purple;
+  /* background-color: purple; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,13 +119,13 @@ body {
 #right_section {
   width: 75vmax;
   height: 100%;
-  background-color: rgba(152, 251, 152, 0.959);
+  /* background-color: rgba(152, 251, 152, 0.959); */
   /* padding: 0 2vmax; */
 }
 .right_chat_footer {
   width: 73vmax;
   height: 4vmax;
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +134,7 @@ body {
 .frnd_dp {
   width: 40px;
   height: 40px;
-  background-color: yellow;
+  background-color: rgb(0, 0, 0);
   border-radius: 50%;
 }
 .frnd_name {
@@ -148,7 +148,7 @@ body {
 .all_chats_content {
   width: 100%;
   max-height: 45vmax;
-  background-color: palevioletred;
+  /* background-color: palevioletred; */
   margin-top: 1vmax;
   padding: 0.5vmax 1vmax;
   overflow-y: auto;
@@ -160,7 +160,7 @@ body {
 .msg{
     width: 100%;
     min-height: 4vh;
-    background-color: aqua;
+    background-color: rgb(151, 155, 155);
 
 }
 /* message form below */
@@ -196,7 +196,7 @@ body {
 #side_menu{
     width:15vmax;
     height: 53vmax;
-    background-color: skyblue;
+    /* background-color: skyblue; */
     position: absolute;
     top: 1vmax;
     left: -15vmax;
