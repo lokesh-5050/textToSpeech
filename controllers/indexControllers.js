@@ -3,6 +3,8 @@ const userModel = require("../models/users");
 const otherUser = require("../models/otherUsers")
 const io = require("socket.io")
 
+const mongoose = require("mongoose")
+
 
 
 
@@ -31,11 +33,12 @@ exports.userCreation = async (req, res, next) => {
 
 //Api func of chats page
 exports.chatsPage = async(req, res, next) => {
-  let loggedInUser = await userModel.findOne({_id:req.user._id})
-  console.log(loggedInUser);
+  const loggedInUser = await userModel.findOne({_id:req.user._id})
+  // console.log(loggedInUser);
 
-  let otherUsersExceptMe = await otherUser.find({_id:{ $ne: loggedInUser._id}})
-  res.render("showchats" , {user:loggedInUser , frnds:otherUsersExceptMe});
+  const otherUsersExceptMe = await otherUser.find({_id : { $ne : loggedInUser._id }})
+  console.log(otherUsersExceptMe + "./././line 40" ,  loggedInUser._id);
+  res.render("showchats" , {user:loggedInUser , frnds:otherUsersExceptMe});   
 };
 
 //Api func of signup page

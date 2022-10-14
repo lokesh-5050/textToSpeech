@@ -11,12 +11,17 @@ var socketId = [];
 
 // Add your socket.io logic here!
 io.on( "connection", function( socket ) {
+    // socket.join("room 1")
+    // socket.join(["room1 , room2"])
+    console.log("User connected");
+    // io.to("room1").emit("hey")
     // console.log( "A user connected" , socket.id );  
-
+    // console.log(socket.rooms);
     //listening connected userId
     socket.on("connected_userId" ,async (data) => {
-        // console.log(data);
-    let index = userIdMongo.indexOf(data.userId)
+        console.log(data);
+        
+        let index = userIdMongo.indexOf(data.userId)
     
         if(userIdMongo.includes(data.userId , index)){
             console.log("user id is already there");
@@ -43,6 +48,15 @@ io.on( "connection", function( socket ) {
         
     })
 
+
+    //listening private msg send by one frnd to other
+    socket.on("private_msg" , (data)=>{
+        let index = userIdMongo.indexOf(data.frndMongo_id)
+        let thatFrndSocketId = socketId[index]
+        let mgs = data.type_msg
+        
+
+    })
 });
 // end of socket.io logic
 
