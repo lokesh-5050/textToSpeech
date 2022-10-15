@@ -10,8 +10,8 @@
   <body>
     <div id="main">
       <div class="left_section">
-        <h4 id="userId" style="display: none"><%= user._id %></h4>
-        <h4 id="userName" style="display: none"><%= user.username %></h4>
+        <h4 id="userId" ><%= user._id %></h4>
+        <h4 id="userName"><%= user.username %></h4>
         <% include ../views/partials/chatfooter.ejs %>
 
         <div id="side_menu">
@@ -30,28 +30,42 @@
         <h4>online Users <span id="onlineusers"></span></h4>
 
         <div class="chats_with">
-          <% frnds.forEach(frnd => {%>
+          <% frnds.forEach(user => { %>
+            
+            <div class="chats">
+              <img
+                style="pointer-events: none"
+                class="frnd_img"
+                src="../images/google.png"
+                alt=""
+              />
+              <div style="pointer-events: none" class="from_content">
+                <h3 style="pointer-events: none"><%= user.username%></h3>
+                <h6 style="pointer-events: none"><%= user.mongoId%></h6>
+                <h6 style="pointer-events: none">hey! , How are you?</h6>
+              </div>
+              <div style="pointer-events: none" class="chat_time">
+                <h6 style="pointer-events: none">12.22pm</h6>
+                <h3 style="pointer-events: none">.</h3>
+              </div>
+            </div>
 
-          <div class="chats">
-            <img
-              style="pointer-events: none"
-              class="frnd_img"
-              src="../images/google.png"
-              alt=""
-            />
-            <div style="pointer-events: none" class="from_content">
-              <h3 style="pointer-events: none"><%= frnd.username %></h3>
-              <h6 style="pointer-events: none"><%= frnd.mongoId %></h6>
-              <h6 style="pointer-events: none">hey! , How are you?</h6>
-            </div>
-            <div style="pointer-events: none" class="chat_time">
-              <h6 style="pointer-events: none">12.22pm</h6>
-              <h3 style="pointer-events: none">.</h3>
-            </div>
-          </div>
-          <%}); %>
+          <%}); %> 
+
+
+
         </div>
       </div>
+
+
+      <div style="width: 20vmax;height: 20vmax;background-color: skyblue;
+      position: absolute;right: 0;top: 20%;display: flex;flex-direction: column;gap: 1vmax;" id="test">
+    
+      <!-- 
+      <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div>
+      <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div> -->
+    </div>
+
 
       <div style="opacity: 0" id="right_section" class="left_section">
         <div class="right_chat_footer">
@@ -65,7 +79,7 @@
         </div>
 
         <div class="all_chats_content">
-          <div class="msg"></div>
+          
           <div class="msg"></div>
           <div class="msg"></div>
           <div class="msg"></div>
@@ -95,13 +109,15 @@
             placeholder="Type a new message..."
           />
           <input type="files" style="display: none" />
-          <input type="submit" value="submit" style="display: none" />
+          <input type="submit" value="submit" id="sendThisMsg" style="display: none" />
           <img class="upload_opt" src="../images/arrowcircleup2.png" alt="" />
           <img class="send_msg" src="../images/send.png" alt="" />
         </form>
       </div>
     </div>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
     integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ=="
@@ -135,7 +151,6 @@
     const right_section = document.querySelector("#right_section");
     const frnd_name = document.querySelector("#frnd_name");
     const frnd_id = document.querySelector("#frnd_id");
-    frnd_id;
     whole_frnds_section.addEventListener("click", (e) => {
       console.log(e);
       var frndId = e.target.children[1].children[1].innerHTML;
@@ -147,16 +162,52 @@
 
     //sending message to frnd
 
-    const send_msg_form = document.querySelector("#send_msg_form");
+    const send_msg_form = document.querySelector("#send_msg_form");send_msg
+    var sendThisMsg = document.getElementById("sendThisMsg")
+    var send_msg = document.querySelector(".send_msg")
+    send_msg.addEventListener("click" , (e)=>{
+      sendThisMsg.click()
+    })
+
     send_msg_form.addEventListener("submit", (e) => {
+      var loginUserMongoId = document.querySelector("#userId").innerHTML
       e.preventDefault();
       var frndMongo_id = document.querySelector("#frnd_id").innerHTML;
       const type_msg = document.querySelector("#type_msg").value;
       console.log(type_msg);
+
       //sending msg to this friend
-      socket.emit("private_msg", { type_msg, frndMongo_id });
+      socket.emit("private_msg", { type_msg, frndMongo_id , loginUserMongoId  });
       console.log(frndMongo_id + "../..144");
       console.log("not sub");
     });
+
+    //receiving private_msg from server in client side
+    // socket.on("private_msg" , (data)=>{
+    //   console.log(data);
+    //   var all_chats_content = document.querySelector(".all_chats_content")
+    //   all_chats_content.innerHTML += ` <div class="msg">${data.msgs}</div>`
+    // })
+
+      var test = document.getElementById("test")
+    socket.on("msg" , function(data){
+      console.log(data + "[][haa bhai me hi hu");
+      let msg = data.msgs
+      let frndSocketId = data.thatFrndSocketId
+      let sendersUsername = data.sendersUsername
+      test.innerHTML += `<div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg">from:${sendersUsername} <br> ${msg}</div>`
+
+
+    })
+
+
+    //welcome
+    socket.on("welcome" , function(data){
+      console.log(data);
+    })
+    
+
+
+    
   </script>
 </html>

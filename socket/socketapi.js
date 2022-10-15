@@ -11,7 +11,11 @@ var socketId = [];
 
 // Add your socket.io logic here!
 io.on( "connection", function( socket ) {
-    // socket.join("room 1")
+
+    
+
+    socket.join(socket.id)
+    io.to(socket.id).emit("welcome" , "hey welcome to this room + ` ${socket.id}` ")
     // socket.join(["room1 , room2"])
     console.log("User connected");
     // io.to("room1").emit("hey")
@@ -50,12 +54,23 @@ io.on( "connection", function( socket ) {
 
 
     //listening private msg send by one frnd to other
-    socket.on("private_msg" , (data)=>{
+    socket.on("private_msg" , async(data)=>{
         let index = userIdMongo.indexOf(data.frndMongo_id)
         let thatFrndSocketId = socketId[index]
-        let mgs = data.type_msg
-        
+        let msgs = data.type_msg
+        let loginUserMongoId = data.loginUserMongoId
 
+        let indexForSendersName = userIdMongo.indexOf(loginUserMongoId)
+        let sendersUsername = usernameFromMongo[indexForSendersName]
+
+
+        // let frndSchema = await userModel.findOne({_id: data.frndMongo_id})
+        // console.log(frndSchema);
+
+        socket.to(thatFrndSocketId).emit("msg" , {msgs , thatFrndSocketId , sendersUsername })
+
+        // socket.emit("private_msg" , {msgs , thatFrndSocketId})  
+        console.log(msgs);
     })
 });
 // end of socket.io logic

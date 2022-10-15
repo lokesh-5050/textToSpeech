@@ -11,7 +11,8 @@ const {
   userCreation,
   passport_authenticate,
   chatsPage,
-  signupPage
+  signupPage,
+  checkOnlineUsers
 } = require("../controllers/indexControllers");
 
 //middlewares
@@ -34,5 +35,7 @@ router.get("/chats", isLoggedIn ,chatsPage);
 
 // API OF chats Page
 router.get("/signup" , signupPage);
+
+// router.get("/checkOnlineUsers" , checkOnlineUsers )
 
 module.exports = router;

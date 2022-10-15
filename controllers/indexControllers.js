@@ -45,3 +45,11 @@ exports.chatsPage = async(req, res, next) => {
 exports.signupPage = (req, res, next) => {
   res.render("signup");
 };
+
+
+//Api fnc of /checkOnlineUsers
+// exports.checkOnlineUsers = async(req,res,next) =>{
+//   let logInUser = await userModel.findOne({_id:req.user._id})
+//   let allUsersExcpetMe = await otherUser.find({_id:{$ne : logInUser._id}})
+//   res.json(allUsersExcpetMe)
+// }
