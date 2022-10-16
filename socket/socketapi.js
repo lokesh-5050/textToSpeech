@@ -12,7 +12,7 @@ var socketId = [];
 // Add your socket.io logic here!
 io.on( "connection", function( socket ) {
 
-    
+    //lets join the connected user in a room!
 
     socket.join(socket.id)
     io.to(socket.id).emit("welcome" , "hey welcome to this room + ` ${socket.id}` ")
