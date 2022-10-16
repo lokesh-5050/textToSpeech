@@ -12,10 +12,12 @@ var socketId = [];
 // Add your socket.io logic here!
 io.on( "connection", function( socket ) {
 
+
+
     //lets join the connected user in a room!
 
-    socket.join(socket.id)
-    io.to(socket.id).emit("welcome" , "hey welcome to this room + ` ${socket.id}` ")
+    socket.join(`${socket.id}`)
+    io.to(`${socket.id}`).emit("welcome" , "hey welcome to this room + ` ${socket.id}` ")
     // socket.join(["room1 , room2"])
     console.log("User connected");
     // io.to("room1").emit("hey")
@@ -23,7 +25,6 @@ io.on( "connection", function( socket ) {
     // console.log(socket.rooms);
     //listening connected userId
     socket.on("connected_userId" ,async (data) => {
-        console.log(data);
         
         let index = userIdMongo.indexOf(data.userId)
     
@@ -36,6 +37,7 @@ io.on( "connection", function( socket ) {
             userIdMongo.push(data.userId)
             usernameFromMongo.push(data.userName)
             socketId.push(socket.id)
+
             let newUsers =  new otherUsers({
                 username:data.userName,
                 socketId:socket.id,
@@ -45,8 +47,6 @@ io.on( "connection", function( socket ) {
             console.log(newUserSaved + ".././36");
             console.log(usernameFromMongo , userIdMongo , socketId);
             io.emit("online_users" , {usernameFromMongo , userIdMongo , socketId})
-
-    
         }
         
         
@@ -67,11 +67,30 @@ io.on( "connection", function( socket ) {
         // let frndSchema = await userModel.findOne({_id: data.frndMongo_id})
         // console.log(frndSchema);
 
-        socket.to(thatFrndSocketId).emit("msg" , {msgs , thatFrndSocketId , sendersUsername })
+        socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId  })
 
         // socket.emit("private_msg" , {msgs , thatFrndSocketId})  
         console.log(msgs);
     })
+
+
+    //on disconnect logic
+    socket.on("disconnect", function (data) {
+        let index = socketId.indexOf(socket.id)
+        var disconnectedUser = usernameFromMongo[index]
+        // io.emit("disconnectedUser" , disconnectedUser)
+        
+        usernameFromMongo.splice(index, 1)
+        userIdMongo.splice(index, 1)
+        socketId.splice(index , 1)
+
+        io.emit("online_users" , {usernameFromMongo , userIdMongo , socketId})
+
+
+
+
+    })
+
 });
 // end of socket.io logic
 
