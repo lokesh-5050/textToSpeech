@@ -37,14 +37,7 @@ io.on( "connection", function( socket ) {
             userIdMongo.push(data.userId)
             usernameFromMongo.push(data.userName)
             socketId.push(socket.id)
-
-            let newUsers =  new otherUsers({
-                username:data.userName,
-                socketId:socket.id,
-                mongoId:data.userId,
-            })
-            const newUserSaved = await newUsers.save()
-            console.log(newUserSaved + ".././36");
+           
             console.log(usernameFromMongo , userIdMongo , socketId);
             io.emit("online_users" , {usernameFromMongo , userIdMongo , socketId})
         }
@@ -55,8 +48,10 @@ io.on( "connection", function( socket ) {
 
     //listening private msg send by one frnd to other
     socket.on("private_msg" , async(data)=>{
-        let index = userIdMongo.indexOf(data.frndMongo_id)
+        let index = usernameFromMongo.indexOf(data.frndMongo_Name)
+        console.log(index);
         let thatFrndSocketId = socketId[index]
+        console.log(thatFrndSocketId);
         let msgs = data.type_msg
         let loginUserMongoId = data.loginUserMongoId
 

@@ -29,46 +29,38 @@
         </form>
         <h4>online Users <span id="onlineusers"></span></h4>
 
-        <div class="chats_with">
-          <% frnds.forEach(user => { %>
-
-          <div class="chats">
-            <img
-              style="pointer-events: none"
-              class="frnd_img"
-              src="../images/google.png"
-              alt=""
-            />
-            <div style="pointer-events: none" class="from_content">
-              <h3 style="pointer-events: none"><%= user.username%></h3>
-              <h6 style="pointer-events: none"><%= user.mongoId%></h6>
-              <h6 style="pointer-events: none">hey! , How are you?</h6>
-            </div>
-            <div style="pointer-events: none" class="chat_time">
-              <h6 style="pointer-events: none">12.22pm</h6>
-              <h3 style="pointer-events: none">.</h3>
-            </div>
-          </div>
-
-          <%}); %>
-        </div>
+        <div class="chats_with"></div>
       </div>
-
 
       <!-- showing online users Real-time -->
-      <div id="oh_demoOnlineUsers" style="width: 20vmax;height: 20vmax;position: absolute;bottom: 2vmax;right: 0%;background-color: rgb(192, 115, 87);z-index: 99999999;">
-        
-      </div>
+      <div
+        id="oh_demoOnlineUsers"
+        style="
+          width: 20vmax;
+          height: 20vmax;
+          position: absolute;
+          bottom: 2vmax;
+          right: 0%;
+          background-color: rgb(192, 115, 87);
+          z-index: 99999999;
+        "
+      ></div>
 
-
-      <div style="width: 20vmax;height: 20vmax;background-color: skyblue;
+      <div
+        style="
+          width: 20vmax;
+          height: 20vmax;
+          background-color: skyblue;
           position: absolute;
           right: 0;
           top: 20%;
           display: flex;
           flex-direction: column;
-          gap: 1vmax;"id="test">
-          <!-- 
+          gap: 1vmax;
+        "
+        id="test"
+      >
+        <!-- 
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div>
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div> -->
       </div>
@@ -78,32 +70,14 @@
           <img class="frnd_dp" src="" alt="" />
           <div class="frnd_name">
             <h4 id="frnd_name"></h4>
-            <h6 id="frnd_id"></h6>
             <lead>online</lead>
           </div>
           <img class="chat_search" src="../images/searchnormal1.png" alt="" />
         </div>
 
         <div class="all_chats_content">
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
-          <div class="msg"></div>
+          
+         
         </div>
 
         <!-- send msg form -->
@@ -164,42 +138,31 @@
     socket.on("online_users", (data) => {
       console.log(data.usernameFromMongo);
       onlineusers.innerHTML = data.socketId.length;
-      let oh_demoOnlineUsers = document.querySelector("#oh_demoOnlineUsers")
-      let thisOnlineUsers = ""
-      data.usernameFromMongo.forEach(user => {
-        thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`
+      let chats_with = document.querySelector(".chats_with");
+      let thisOnlineUsers = "";
+      data.usernameFromMongo.forEach((user) => {
+        thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`;
       });
-      let frndIds = ""
-      data.userIdMongo.forEach(id => {
-        frndIds += `${id} <br>`
-      });
-
-
-      oh_demoOnlineUsers.innerHTML = thisOnlineUsers+frndIds
+      chats_with.innerHTML = thisOnlineUsers;
     });
-
-
-    //checking for getting id with realtime names
-    let oh_demoOnlineUsers = document.getElementById("oh_demoOnlineUsers")
-    oh_demoOnlineUsers.addEventListener("click" , (e)=>{
-      // console.log(e.target.offsetParent.childNodes[2].data);
-      console.log(e);
-    })
-    
 
     //private msg setup id and all
     var whole_frnds_section = document.querySelector(".chats_with");
     const right_section = document.querySelector("#right_section");
     const frnd_name = document.querySelector("#frnd_name");
-    const frnd_id = document.querySelector("#frnd_id");
     whole_frnds_section.addEventListener("click", (e) => {
-      // console.log(e);
-      var frndId = e.target.children[1].children[1].innerHTML;
-      console.log(frndId);
+      console.log(e);
       right_section.style.opacity = "1";
-      frnd_name.innerHTML = e.target.children[1].children[0].innerHTML;
-      frnd_id.innerHTML = frndId;
+      let friendName = e.target.innerHTML;
+      frnd_name.innerHTML = friendName;
     });
+
+    // //checking for getting id with realtime names
+    // let oh_demoOnlineUsers = document.getElementById("oh_demoOnlineUsers")
+    // oh_demoOnlineUsers.addEventListener("click" , (e)=>{
+    //   // console.log(e.target.offsetParent.childNodes[2].data);
+    //   console.log(e);
+    // })
 
     //sending message to frnd
 
@@ -212,15 +175,18 @@
     });
 
     send_msg_form.addEventListener("submit", (e) => {
-      var loginUserMongoId = document.querySelector("#userId").innerHTML;
       e.preventDefault();
-      var frndMongo_id = document.querySelector("#frnd_id").innerHTML;
+      var loginUserMongoId = document.querySelector("#userId").innerHTML;
+      var frndMongo_Name = document.querySelector("#frnd_name").innerHTML;
       const type_msg = document.querySelector("#type_msg").value;
       console.log(type_msg);
 
       //sending msg to this friend
-      socket.emit("private_msg", { type_msg, frndMongo_id, loginUserMongoId });
-      console.log(frndMongo_id + "../..144");
+      socket.emit("private_msg", {
+        type_msg,
+        frndMongo_Name,
+        loginUserMongoId,
+      });
       console.log("not sub");
     });
 
@@ -234,13 +200,22 @@
     var test = document.getElementById("test");
     socket.on("msg", function (data) {
       console.log(data + "[][haa bhai me hi hu");
-      let msg = data.msgs;
-      let frndSocketId = data.thatFrndSocketId;
-      let sendersUsername = data.sendersUsername;
-      let frnd_id = document.getElementById("frnd_id");
-      console.log(frnd_id.innerHTML === data.loginUserMongoId);
+      var msg = data.msgs;
+      var sendersUsername = data.sendersUsername;
+      // let frndSocketId = data.thatFrndSocketId;
+      // let frnd_id = document.getElementById("frnd_id");
       test.innerHTML += `<div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg">from:${sendersUsername} <br> ${msg}</div>`;
     });
+
+
+    socket.on("msg" , function(data){
+      let sendersName = data.sendersUsername;
+      let frnd_name = document.querySelector("#frnd_name").innerHTML
+      if(sendersName == frnd_name){
+        let all_chats_content = document.querySelector(".all_chats_content")
+        all_chats_content.innerHTML += `<div class="msg">${data.sendersUsername} : ${data.msgs}</div>`
+      }
+    })
 
     //welcome
     socket.on("welcome", function (data) {
