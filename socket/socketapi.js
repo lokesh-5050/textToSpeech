@@ -1,6 +1,5 @@
 const io = require( "socket.io" )();
 var userModel = require("../models/users");
-const otherUsers = require("../models/otherUsers");
 const socketapi = {
     io: io
 };

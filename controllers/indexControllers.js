@@ -1,6 +1,5 @@
 const passport = require("passport");
 const userModel = require("../models/users");
-const otherUser = require("../models/otherUsers")
 const io = require("socket.io")
 
 const mongoose = require("mongoose")
