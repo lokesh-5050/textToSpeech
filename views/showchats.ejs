@@ -208,14 +208,14 @@
     });
 
 
-    socket.on("msg" , function(data){
-      let sendersName = data.sendersUsername;
-      let frnd_name = document.querySelector("#frnd_name").innerHTML
-      if(sendersName == frnd_name){
-        let all_chats_content = document.querySelector(".all_chats_content")
-        all_chats_content.innerHTML += `<div class="msg">${data.sendersUsername} : ${data.msgs}</div>`
-      }
-    })
+    // socket.on("msg" , function(data){
+    //   let sendersName = data.sendersUsername;
+    //   let frnd_name = document.querySelector("#frnd_name").innerHTML
+    //   if(sendersName == frnd_name){
+    //     let all_chats_content = document.querySelector(".all_chats_content")
+    //     all_chats_content.innerHTML += `<div class="msg">${data.sendersUsername} : ${data.msgs}</div>`
+    //   }
+    // })
 
     //welcome
     socket.on("welcome", function (data) {
@@ -230,11 +230,17 @@
     whole_frnds_sec.addEventListener("click", async(e) => {
       console.log(e);
       let grabFrndUsername = frnd_namee.innerHTML
-      console.log(grabFrndUsername +"aaya?");
 
       const Messages = await axios.get(`/allMessages/${grabFrndUsername}`)
       
         console.log(Messages);
+        var msgContainer = ""
+        Messages.data.messagesOfTwoUser.forEach(elem => {
+          msgContainer += `${elem.message}`
+        });
+
+        console.log(msgContainer);
+      
     });
 
 
