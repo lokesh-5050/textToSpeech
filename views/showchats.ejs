@@ -12,7 +12,7 @@
       <div class="left_section">
         <h4 id="userId"><%= user._id %></h4>
         <h4 id="userName"><%= user.username %></h4>
-        <% include ../views/partials/chatfooter.ejs %>
+        <%# include ../views/partials/chatfooter.ejs %>
 
         <div id="side_menu">
           <h1 id="remove">X</h1>
@@ -221,5 +221,22 @@
     socket.on("welcome", function (data) {
       console.log(data);
     });
+
+
+    //10/18/2022
+    let whole_frnds_sec = document.querySelector(".chats_with");
+    let right_sec = document.querySelector("#right_section");
+    let frnd_namee = document.querySelector("#frnd_name");
+    whole_frnds_sec.addEventListener("click", async(e) => {
+      console.log(e);
+      let grabFrndUsername = frnd_namee.innerHTML
+      console.log(grabFrndUsername +"aaya?");
+
+      const Messages = await axios.get(`/allMessages/${grabFrndUsername}`)
+      
+        console.log(Messages);
+    });
+
+
   </script>
 </html>

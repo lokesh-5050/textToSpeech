@@ -1,5 +1,6 @@
 const io = require( "socket.io" )();
 var userModel = require("../models/users");
+var messageModel = require("../models/messages")
 const socketapi = {
     io: io
 };
@@ -49,7 +50,9 @@ io.on( "connection", function( socket ) {
     socket.on("private_msg" , async(data)=>{
         let index = usernameFromMongo.indexOf(data.frndMongo_Name)
         console.log(index);
+        let frndUsername = usernameFromMongo[index]
         let thatFrndSocketId = socketId[index]
+        let thatFrndMongoId = userIdMongo[index]
         console.log(thatFrndSocketId);
         let msgs = data.type_msg
         let loginUserMongoId = data.loginUserMongoId
@@ -60,8 +63,15 @@ io.on( "connection", function( socket ) {
 
         // let frndSchema = await userModel.findOne({_id: data.frndMongo_id})
         // console.log(frndSchema);
+        let newMessage = await messageModel.create({
+            message : msgs,
+            users:[sendersUsername , frndUsername ],
+            sender:loginUserMongoId
+        })
 
-        socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId  })
+        console.log(newMessage + ",..//msg added to mongo");
+
+        socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId , thatFrndMongoId  , frndUsername  })
 
         // socket.emit("private_msg" , {msgs , thatFrndSocketId})  
         console.log(msgs);
@@ -73,11 +83,11 @@ io.on( "connection", function( socket ) {
         let index = socketId.indexOf(socket.id)
         var disconnectedUser = usernameFromMongo[index]
         // io.emit("disconnectedUser" , disconnectedUser)
-        
+        let disconnectedUsername = usernameFromMongo[index]
         usernameFromMongo.splice(index, 1)
         userIdMongo.splice(index, 1)
         socketId.splice(index , 1)
-
+        console.log(disconnectedUsername + "...disconnectedUsername");
         io.emit("online_users" , {usernameFromMongo , userIdMongo , socketId})
 
 

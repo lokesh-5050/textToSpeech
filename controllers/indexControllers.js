@@ -35,9 +35,9 @@ exports.chatsPage = async(req, res, next) => {
   const loggedInUser = await userModel.findOne({_id:req.user._id})
   // console.log(loggedInUser);
 
-  const otherUsersExceptMe = await otherUser.find({_id : { $ne : loggedInUser._id }})
-  console.log(otherUsersExceptMe + "./././line 40" ,  loggedInUser._id);
-  res.render("showchats" , {user:loggedInUser , frnds:otherUsersExceptMe});   
+  // const otherUsersExceptMe = await otherUser.find({_id : { $ne : loggedInUser._id }})
+  // console.log(otherUsersExceptMe + "./././line 40" ,  loggedInUser._id);
+  res.render("showchats" , {user:loggedInUser});   
 };
 
 //Api func of signup page
@@ -52,3 +52,6 @@ exports.signupPage = (req, res, next) => {
 //   let allUsersExcpetMe = await otherUser.find({_id:{$ne : logInUser._id}})
 //   res.json(allUsersExcpetMe)
 // }
+
+
+  

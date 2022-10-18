@@ -15,6 +15,11 @@ const {
   checkOnlineUsers
 } = require("../controllers/indexControllers");
 
+//message handler
+const {
+  allMessages
+} = require("../controllers/messagesController")
+
 //middlewares
 const{isLoggedIn , checkIsLoggedIn} = require("../middlewares/middlewares")
 
@@ -36,6 +41,9 @@ router.get("/chats", isLoggedIn ,chatsPage);
 // API OF chats Page
 router.get("/signup" , signupPage);
 
-// router.get("/checkOnlineUsers" , checkOnlineUsers )
+//Api of allMessages
+router.get("/allMessages/:grabFrndUsername" , allMessages);
+
+
 
 module.exports = router;
