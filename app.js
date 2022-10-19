@@ -5,8 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors")
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./models/users');
+
 var passport = require("passport")
 var expressSession = require("express-session")
 var app = express();

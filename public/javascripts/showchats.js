@@ -8,3 +8,9 @@ const remove = document.getElementById("remove");
 remove.addEventListener("click" , (e)=>{
     side_menu.style.left = "-15vmax"
 })
+
+
+//firebase setup
+// Import the functions you need from the SDKs you need
+
+

@@ -5,6 +5,30 @@ const socketapi = {
     io: io
 };
 
+
+// // Import the functions you need from the SDKs you need
+// const {initializeApp} = require("firebase/app")
+// const {getAnalytics} = require("firebase/analytics")
+
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyA1DVp5MNmDX_ulB5NXF7n8A7uZhtLAAtY",
+//   authDomain: "tellemm-2a6a0.firebaseapp.com",
+//   projectId: "tellemm-2a6a0",
+//   storageBucket: "tellemm-2a6a0.appspot.com",
+//   messagingSenderId: "630478718816",
+//   appId: "1:630478718816:web:bb1c6044a9ef99f99f0005",
+//   measurementId: "G-3WMGT5TTRB"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+
 var usernameFromMongo = [];
 var userIdMongo = [];
 var socketId = [];
