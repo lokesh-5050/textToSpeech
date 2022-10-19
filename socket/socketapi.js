@@ -73,14 +73,14 @@ io.on( "connection", function( socket ) {
     //listening private msg send by one frnd to other
     socket.on("private_msg" , async(data)=>{
         let index = usernameFromMongo.indexOf(data.frndMongo_Name)
-        console.log(index);
+        // console.log(index);
         let frndUsername = usernameFromMongo[index]
         let thatFrndSocketId = socketId[index]
         let thatFrndMongoId = userIdMongo[index]
-        console.log(thatFrndSocketId);
+        // console.log(thatFrndSocketId);
         let msgs = data.type_msg
         let loginUserMongoId = data.loginUserMongoId
-
+        var sentMessage = data.type_msg
         let indexForSendersName = userIdMongo.indexOf(loginUserMongoId)
         let sendersUsername = usernameFromMongo[indexForSendersName]
 
@@ -94,7 +94,7 @@ io.on( "connection", function( socket ) {
         })
 
         console.log(newMessage + ",..//msg added to mongo");
-
+        socket.emit("you_sent_this_msg" , [sentMessage])
         socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId , thatFrndMongoId  , frndUsername  })
 
         // socket.emit("private_msg" , {msgs , thatFrndSocketId})  
