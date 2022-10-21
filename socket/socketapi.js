@@ -89,12 +89,12 @@ io.on( "connection", function( socket ) {
         // console.log(frndSchema);
         let newMessage = await messageModel.create({
             message : msgs,
-            users:[sendersUsername , frndUsername ],
+            users:[loginUserMongoId , frndUsername ],
             sender:loginUserMongoId
         })
 
         console.log(newMessage + ",..//msg added to mongo");
-        socket.emit("you_sent_this_msg" , [sentMessage])
+        socket.emit("you_sent_this_msg" , {sentMessage , sendersUsername ,frndUsername})
         socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId , thatFrndMongoId  , frndUsername  })
 
         // socket.emit("private_msg" , {msgs , thatFrndSocketId})  

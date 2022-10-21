@@ -164,11 +164,11 @@ body {
 
 }
 /* message form below */
-#send_msg_form {
+.send_msg_form {
   position: relative;
 }
 #type_msg {
-  width: 62vmax;
+  width: 20vmax;
   height: 3.01vmax;
   outline: none;
   border: none;
@@ -177,15 +177,16 @@ body {
   border-radius: 5px;
 }
 .upload_opt {
-  width: 2.5vmax;
-  height: 2.5vmax;
+  width: 1.8vmax;
+  
+  height: 1.8vmax;
   position: absolute;
-  right: 6.5vmax;
+  right: 5.5vmax;
   top: 0.25vmax;
 }
 
 .send_msg{
-    width: 2vmax;
+    width: 1.5vmax;
     margin-left: 5.5vmax;
     position: absolute;
     top: 0.5vmax;

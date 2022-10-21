@@ -11,6 +11,14 @@
 
 <body>
   <div id="main">
+    <div style="
+          min-width: 30vmax;
+          height: 53vmax;
+          background-color: rgb(255, 255, 255);
+          position: absolute;
+          right: 0%;
+          overflow-y: auto;" class="chat_interfaces"></div>
+
     <div class="left_section">
       <h4 id="userId"><%= user._id %></h4>
       <h4 id="userName"><%= user.username %></h4>
@@ -36,28 +44,24 @@
           height: 20vmax;
           position: absolute;
           bottom: 2vmax;
-          right: 0%;
+          right: 30%;
           background-color: rgb(192, 115, 87);
-          z-index: 99999999;
+          z-index: 99999999;display: none;
         "></div>
 
-    <div style="
-          width: 20vmax;
-          height: 20vmax;
-          background-color: skyblue;
+    <div style="width: 20vmax;height: 20vmax;background-color: skyblue;
           position: absolute;
-          right: 0;
+          right: 30%;
           top: 20%;
           display: flex;
           flex-direction: column;
-          gap: 1vmax;
-        " id="test">
+          gap: 1vmax;display: none;" id="test">
       <!-- 
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div>
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div> -->
     </div>
 
-    <div style="opacity: 0" id="right_section" class="left_section">
+    <div style="display: none" id="right_section" class="left_section">
       <div class="right_chat_footer">
         <img class="frnd_dp" src="" alt="" />
         <div class="frnd_name">
@@ -67,20 +71,10 @@
         <img class="chat_search" src="../images/searchnormal1.png" alt="" />
       </div>
 
-      <div class="all_chats_content">
-
-        <div class="msg"></div>
-
-      </div>
+      <div class="all_chats_content"></div>
 
       <!-- send msg form -->
-      <form id="send_msg_form" action="" method="post">
-        <input id="type_msg" type="text" placeholder="Type a new message..." />
-        <input type="files" style="display: none" />
-        <input type="submit" value="submit" id="sendThisMsg" style="display: none" />
-        <img class="upload_opt" src="../images/arrowcircleup2.png" alt="" />
-        <img class="send_msg" src="../images/send.png" alt="" />
-      </form>
+     
     </div>
   </div>
 </body>
@@ -116,21 +110,52 @@
     let chats_with = document.querySelector(".chats_with");
     let thisOnlineUsers = "";
     data.usernameFromMongo.forEach((user) => {
-      thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`;
+      if(document.querySelector("#userName").innerHTML == `${user}`){}else{
+
+        thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`;
+      }
     });
     chats_with.innerHTML = thisOnlineUsers;
   });
 
-  //private msg setup id and all
-  var whole_frnds_section = document.querySelector(".chats_with");
-  const right_section = document.querySelector("#right_section");
-  const frnd_name = document.querySelector("#frnd_name");
-  whole_frnds_section.addEventListener("click", (e) => {
-    console.log(e);
-    right_section.style.opacity = "1";
-    let friendName = e.target.innerHTML;
-    frnd_name.innerHTML = friendName;
+  // creating a div as many online users
+  
+  var chat_interfaces = document.querySelector(".chat_interfaces");
+  socket.on("online_users", (data) => {
+    console.log(data.usernameFromMongo);
+    let chatInterface = "";
+    data.usernameFromMongo.forEach((user) => {
+      if(document.querySelector("#userName").innerHTML == `${user}`){}else{
+
+        chatInterface += `<div style="min-width: 20vmax;height: 30vmax;background-color: palegreen;position: relative;display: none;" id="${user}" class="interface">
+          <h4 id="thisFrndName">${user}</h4>
+          <div style="width: 100%;height: 85%;background-color: red;margin-top: 1vmax;display: flex;flex-direction: column;gap: 1vmax;" class="texts">
+            
+            
+          </div>
+          <form class="send_msg_form" class="${user}_from" action="" method="post">
+        <input id="type_msg" type="text" placeholder="Type a new message..." />
+        <input type="file" id="choose_files" style="display: none" />
+        <input type="submit" value="submit" id="sendThisMsg" style="display: none" />
+        <img class="upload_opt" src="../images/arrowcircleup2.png" alt="" />
+        <img class="send_msg" src="../images/send.png" alt="" />
+      </form>                                       
+        </div>`;
+      }
+    });
+    chat_interfaces.innerHTML = chatInterface;
   });
+
+  //private msg setup id and all
+  // var whole_frnds_section = document.querySelector(".chats_with");
+  // const right_section = document.querySelector("#right_section");
+  // const frnd_name = document.querySelector("#frnd_name");
+  // whole_frnds_section.addEventListener("click", (e) => {
+  //   console.log(e);
+  //   right_section.style.display = "initial";
+  //   let friendName = e.target.innerHTML;
+  //   frnd_name.innerHTML = friendName;
+  // });
 
   // //checking for getting id with realtime names
   // let oh_demoOnlineUsers = document.getElementById("oh_demoOnlineUsers")
@@ -141,29 +166,24 @@
 
   //sending message to frnd
 
-  const send_msg_form = document.querySelector("#send_msg_form");
-  send_msg;
-  var sendThisMsg = document.getElementById("sendThisMsg");
-  var send_msg = document.querySelector(".send_msg");
-  send_msg.addEventListener("click", (e) => {
-    sendThisMsg.click();
-  });
+    
 
-  send_msg_form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    var loginUserMongoId = document.querySelector("#userId").innerHTML;
-    var frndMongo_Name = document.querySelector("#frnd_name").innerHTML;
-    const type_msg = document.querySelector("#type_msg").value;
-    console.log(type_msg);
+  // send_msg_form.addEventListener("submit", (e) => {
+  //   e.preventDefault();
+  //   console.log(e);
+  //   var loginUserMongoId = document.querySelector("#userId").innerHTML;
+  //   var frndMongo_Name = document.querySelector("#frnd_name").innerHTML;
+  //   const type_msg = document.querySelector("#type_msg").value;
+  //   console.log(type_msg);
 
-    //sending msg to this friend
-    socket.emit("private_msg", {
-      type_msg,
-      frndMongo_Name,
-      loginUserMongoId,
-    });
-    console.log("not sub");
-  });
+  //   //sending msg to this friend
+  //   socket.emit("private_msg", {
+  //     type_msg,
+  //     frndMongo_Name,
+  //     loginUserMongoId,
+  //   });
+  //   console.log("not sub");
+  // });
 
   //receiving private_msg from server in client side
   // socket.on("private_msg" , (data)=>{
@@ -173,26 +193,29 @@
   // })
 
   var test = document.getElementById("test");
+
   socket.on("msg", function (data) {
+    var thisChatInterface = document.querySelector(
+      `#${data.sendersUsername} .texts `
+    );
+    thisChatInterface.innerHTML += `<div style="width: 100%;height: 2vmax;background-color: orange;" class="text">
+          <h5>${data.msgs}</h5>
+          </div>`;
     console.log(data + "[][haa bhai me hi hu");
     var msg = data.msgs;
     var sendersUsername = data.sendersUsername;
     // let frndSocketId = data.thatFrndSocketId;
     // let frnd_id = document.getElementById("frnd_id");
-    test.innerHTML += `<div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg">from:${sendersUsername} <br> ${msg}</div>`;
+    // test.innerHTML += `<div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg">from:${sendersUsername} <br> ${msg}</div>`;
   });
 
   //showing the user his message that he just sent
   socket.on("you_sent_this_msg", async (data) => {
-    console.log(data);
-    let addThisMsgsHere = document.querySelector(".all_chats_content")
-    let addingMsgs = ""
-    data.forEach(elem => {
-      addingMsgs += `<div class="msg">${elem}</div>`
-    });
-    addThisMsgsHere.innerHTML  += addingMsgs
-  })
-
+    var myChatWithHim = document.querySelector(`#${data.frndUsername} .texts`);
+    myChatWithHim.innerHTML += `<div style="width: 100%;height: 2vmax;background-color: orange;" class="text">
+            <h5>${data.sentMessage}</h5>
+          </div>`;
+  });
 
   // socket.on("msg" , function(data){
   //   let sendersName = data.sendersUsername;
@@ -208,32 +231,122 @@
     console.log(data);
   });
 
+  // //10/18/2022
+  // let whole_frnds_sec = document.querySelector(".chats_with");
+  // let right_sec = document.querySelector("#right_section");
+  // let frnd_namee = document.querySelector("#frnd_name");
+  // whole_frnds_sec.addEventListener("click", async (e) => {
+  //   const addThisMsgsHereeee = document.querySelector(".all_chats_content");
+  //   // console.log(e);
+  //   let grabFrndUsername = frnd_namee.innerHTML;
+  //   let loginUserId = document.querySelector("#userId").innerHTML;
+  //   const Messages = await axios.get(
+  //     `/allMessages/${grabFrndUsername}/${loginUserId}`
+  //   );
+  //   console.log(Messages);
+  //   if (Messages !== null) {
+  //     let msgContainer = "";
+  //     Messages.data.forEach((e) => {
+  //       msgContainer += `<div class="msg">${e.message}</div>`;
+  //     });
 
-  //10/18/2022
-  let whole_frnds_sec = document.querySelector(".chats_with");
-  let right_sec = document.querySelector("#right_section");
-  let frnd_namee = document.querySelector("#frnd_name");
-  whole_frnds_sec.addEventListener("click", async (e) => {
-    // console.log(e);
-    let grabFrndUsername = frnd_namee.innerHTML
-    let loginUser = document.querySelector("#userName").innerHTML
-    const Messages = await axios.get(`/allMessages/${grabFrndUsername}/${loginUser}`)
-    Messages.reloadData()
-    console.log(Messages.data.messagesOfTwoUser);
-    let addThisMsgsHere = document.querySelector(".all_chats_content")
+  //     addThisMsgsHereeee.innerHTML += msgContainer;
 
-    let msgContainer = ""
-    Messages.data.messagesOfTwoUser.forEach(e => {
-      msgContainer += `<div class="msg">${e.message}</div>`
+  //     console.log(msgContainer);
+  //   } else {
+  //     addThisMsgsHereeee.innerHTML = "";
+  //   }
+  // });
+
+
+
+  //click on specific user to display initial that cht interface
+  let everyOnlineUsers = document.querySelector(".chats_with")
+  var flag = 0
+  everyOnlineUsers.addEventListener("click" , (e) =>{
+    if(flag==0){
+    console.log(e);
+    var thisName = e.target.innerText
+    console.log(thisName + "././diff");
+    let thisNameDiv = document.querySelector(`#${thisName}`)
+    thisNameDiv.style.display = "initial"
+    let chat_interfaces = document.querySelector(".chat_interfaces")
+    thisNameDiv.style.poisition = "absolute"
+    thisNameDiv.style.zIndex =  "99999";
+    chat_interfaces.style.right = "30%"
+
+    const ownerMongoId = document.querySelector("#userId").innerHTML
+    let this_div_form = document.querySelector(`#${thisName} .send_msg_form`)
+    let msg_input = document.querySelector(`#${thisName} #type_msg`)
+    
+    let send_icon = document.querySelector(`#${thisName} .send_msg`)
+    let send = document.querySelector(`#${thisName} #sendThisMsg`)
+
+    let img_select_icon = document.querySelector(`#${thisName} .upload_opt`)
+    let open_img_choose_options = document.querySelector(`#${thisName} #choose_files`)
+
+    //to send msg through icon
+    send_icon.addEventListener("click" , (e) =>{
+      send.click()
+      console.log("not_send");
     })
 
-    addThisMsgsHere.innerHTML += msgContainer
+    img_select_icon.addEventListener("click" , (e) =>{
+      open_img_choose_options.click()
+    })
+    this_div_form.addEventListener("submit" , (e)=> {
+      e.preventDefault()
+      let frndMongo_Name = thisName
+      let type_msg = msg_input.value
+      msg_input.value = ""
+      let loginUserMongoId = ownerMongoId
+      socket.emit("private_msg" , {frndMongo_Name , type_msg , loginUserMongoId })})
+    flag++
+    }else if(flag==1){
+      console.log(e);
+      e.target.previousSibling.hidden = true
+    
+    var thisName = e.target.innerText
+    console.log(thisName + "././diff");
+    let thisNameDiv = document.querySelector(`#${thisName}`)
+    thisNameDiv.style.display = "initial"
+    let chat_interfaces = document.querySelector(".chat_interfaces")
+    thisNameDiv.style.poisition = "absolute"
+    thisNameDiv.style.zIndex =  "99999";
+    chat_interfaces.style.right = "30%"
 
-    console.log(msgContainer);
+    const ownerMongoId = document.querySelector("#userId").innerHTML
+    let this_div_form = document.querySelector(`#${thisName} .send_msg_form`)
+    let msg_input = document.querySelector(`#${thisName} #type_msg`)
+    
+    let send_icon = document.querySelector(`#${thisName} .send_msg`)
+    let send = document.querySelector(`#${thisName} #sendThisMsg`)
+
+    let img_select_icon = document.querySelector(`#${thisName} .upload_opt`)
+    let open_img_choose_options = document.querySelector(`#${thisName} #choose_files`)
+
+    //to send msg through icon
+    send_icon.addEventListener("click" , (e) =>{
+      send.click()
+      console.log("not_send");
+    })
+
+    img_select_icon.addEventListener("click" , (e) =>{
+      open_img_choose_options.click()
+    })
+    this_div_form.addEventListener("submit" , (e)=> {
+      e.preventDefault()
+      let frndMongo_Name = thisName
+      let type_msg = msg_input.value
+      msg_input.value = ""
+      let loginUserMongoId = ownerMongoId
+      socket.emit("private_msg" , {frndMongo_Name , type_msg , loginUserMongoId })})
+    }
+    
 
 
+  })
 
-  });
 
 
 </script>
