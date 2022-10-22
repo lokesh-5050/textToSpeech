@@ -217,63 +217,46 @@
           </div>`;
   });
 
-  // socket.on("msg" , function(data){
-  //   let sendersName = data.sendersUsername;
-  //   let frnd_name = document.querySelector("#frnd_name").innerHTML
-  //   if(sendersName == frnd_name){
-  //     let all_chats_content = document.querySelector(".all_chats_content")
-  //     all_chats_content.innerHTML += `<div class="msg">${data.sendersUsername} : ${data.msgs}</div>`
-  //   }
-  // })
-
   //welcome
   socket.on("welcome", function (data) {
     console.log(data);
   });
 
-  // //10/18/2022
-  // let whole_frnds_sec = document.querySelector(".chats_with");
-  // let right_sec = document.querySelector("#right_section");
-  // let frnd_namee = document.querySelector("#frnd_name");
-  // whole_frnds_sec.addEventListener("click", async (e) => {
-  //   const addThisMsgsHereeee = document.querySelector(".all_chats_content");
-  //   // console.log(e);
-  //   let grabFrndUsername = frnd_namee.innerHTML;
-  //   let loginUserId = document.querySelector("#userId").innerHTML;
-  //   const Messages = await axios.get(
-  //     `/allMessages/${grabFrndUsername}/${loginUserId}`
-  //   );
-  //   console.log(Messages);
-  //   if (Messages !== null) {
-  //     let msgContainer = "";
-  //     Messages.data.forEach((e) => {
-  //       msgContainer += `<div class="msg">${e.message}</div>`;
-  //     });
-
-  //     addThisMsgsHereeee.innerHTML += msgContainer;
-
-  //     console.log(msgContainer);
-  //   } else {
-  //     addThisMsgsHereeee.innerHTML = "";
-  //   }
-  // });
-
-
-
   //click on specific user to display initial that cht interface
   let everyOnlineUsers = document.querySelector(".chats_with")
-  everyOnlineUsers.addEventListener("click" , (e) =>{
+  everyOnlineUsers.addEventListener("click" , async(e) =>{
    
       console.log(e);
       var thisName = e.target.innerText
       console.log(thisName + "././diff");
+      let loginUserName = document.querySelector("#userName").innerHTML
+      let loginUserId = document.querySelector("#userId").innerHTML
       let thisNameDiv = document.querySelector(`#${thisName}`)
       thisNameDiv.style.display = "initial"
       let chat_interfaces = document.querySelector(".chat_interfaces")
       thisNameDiv.style.poisition = "absolute"
       thisNameDiv.style.zIndex =  "99999";
       chat_interfaces.style.right = "30%"
-  
+
+      //trying to retrive previous msg from daba baseeoooo
+      const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
+      console.log(MessagesOfTwoUser);
+
+      MessagesOfTwoUser.data.forEach(retMsg => {
+        let appendRetMsg = document.querySelector(`#${thisName} .texts`)
+        if(retMsg.byMe === true){
+          appendRetMsg.innerHTML += `<div class="text sentMsg">
+            <h5>${retMsg.message}</h5>
+          </div>`
+        }else if(retMsg.byMe === false){
+          appendRetMsg.innerHTML += `<div class="text recieveMsg">
+            <h5>${retMsg.message}</h5>
+          </div>`
+        }
+      });
+
+
+
       const ownerMongoId = document.querySelector("#userId").innerHTML
       let this_div_form = document.querySelector(`#${thisName} .send_msg_form`)
       let msg_input = document.querySelector(`#${thisName} #type_msg`)

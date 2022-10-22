@@ -89,7 +89,7 @@ io.on( "connection", function( socket ) {
         // console.log(frndSchema);
         let newMessage = await messageModel.create({
             message : msgs,
-            users:[loginUserMongoId , frndUsername ],
+            users:[sendersUsername , frndUsername ],
             sender:loginUserMongoId
         })
 

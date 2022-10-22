@@ -42,7 +42,7 @@ router.get("/chats", isLoggedIn ,chatsPage);
 router.get("/signup" , signupPage);
 
 //Api of allMessages
-router.get("/allMessages/:grabFrndUsername/:loginUserId" , allMessages);
+router.get("/allMessages/:grabFrndUsername/:loginUserName/:loginUserId" , allMessages);
 
 
 
