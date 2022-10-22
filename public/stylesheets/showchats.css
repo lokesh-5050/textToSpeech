@@ -204,3 +204,21 @@ body {
     transition: all cubic-bezier(0.19, 1, 0.22, 1) 2s;
 
 }
+
+
+/* css for .recieveMsg */
+.recieveMsg{
+  max-width: 14vmax;
+  word-wrap: break-word;
+  min-height: 2vmax;
+  background-color: skyblue;
+  margin-left: 0%;
+}
+.sentMsg{
+  max-width: 14vmax;
+  word-wrap: break-word;
+  min-height: 2vmax;
+  margin-left: 18vmax;
+  background-color: skyblue;
+  text-align: left;
+}
