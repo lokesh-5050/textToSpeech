@@ -8,7 +8,8 @@ const messageModel = mongoose.Schema({
     sender:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user"
-    }
+    },
+    time:String
 
 }, {timestamps: true})
 

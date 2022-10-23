@@ -199,7 +199,8 @@
       `#${data.sendersUsername} .texts `
     );
     thisChatInterface.innerHTML += `<div class="text recieveMsg">
-          <h5>${data.msgs}</h5>
+          <h5>${data.msgs}</h5><br>
+            <small>${data.time}</small>
           </div>`;
     console.log(data + "[][haa bhai me hi hu");
     var msg = data.msgs;
@@ -213,7 +214,8 @@
   socket.on("you_sent_this_msg", async (data) => {
     var myChatWithHim = document.querySelector(`#${data.frndUsername} .texts`);
     myChatWithHim.innerHTML += `<div class="text sentMsg">
-            <h5>${data.sentMessage}</h5>
+            <h5>${data.sentMessage}</h5> <br>
+            <small>${data.time}</small>
           </div>`;
   });
 
@@ -241,19 +243,24 @@
       //trying to retrive previous msg from daba baseeoooo
       const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
       console.log(MessagesOfTwoUser);
-
-      MessagesOfTwoUser.data.forEach(retMsg => {
-        let appendRetMsg = document.querySelector(`#${thisName} .texts`)
-        if(retMsg.byMe === true){
-          appendRetMsg.innerHTML += `<div class="text sentMsg">
-            <h5>${retMsg.message}</h5>
-          </div>`
-        }else if(retMsg.byMe === false){
-          appendRetMsg.innerHTML += `<div class="text recieveMsg">
-            <h5>${retMsg.message}</h5>
-          </div>`
-        }
-      });
+      var fetchMsgs = 0
+      if(fetchMsgs == 0){
+        MessagesOfTwoUser.data.forEach(retMsg => {
+          let appendRetMsg = document.querySelector(`#${thisName} .texts`)
+          if(retMsg.byMe === true){
+            appendRetMsg.innerHTML += `<div class="text sentMsg">
+              <h5>${retMsg.message}</h5> <br>
+            <small>${retMsg.time}</small>
+            </div>`
+          }else if(retMsg.byMe === false){
+            appendRetMsg.innerHTML += `<div class="text recieveMsg">
+              <h5>${retMsg.message}</h5><br>
+            <small>${retMsg.time}</small>
+            </div>`
+          }
+        })
+        fetchMsgs++
+      }else if(fetchMsgs == 1){}
 
 
 

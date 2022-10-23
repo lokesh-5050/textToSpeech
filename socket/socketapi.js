@@ -5,6 +5,8 @@ const socketapi = {
     io: io
 };
 
+var moment = require("moment")
+
 
 // // Import the functions you need from the SDKs you need
 // const {initializeApp} = require("firebase/app")
@@ -90,12 +92,14 @@ io.on( "connection", function( socket ) {
         let newMessage = await messageModel.create({
             message : msgs,
             users:[sendersUsername , frndUsername ],
-            sender:loginUserMongoId
+            sender:loginUserMongoId,
+            time:moment().format('LT')
         })
 
+        let time = moment().format('LT')
         console.log(newMessage + ",..//msg added to mongo");
-        socket.emit("you_sent_this_msg" , {sentMessage , sendersUsername ,frndUsername})
-        socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId , thatFrndMongoId  , frndUsername  })
+        socket.emit("you_sent_this_msg" , {sentMessage , sendersUsername ,frndUsername , time})
+        socket.to(`${thatFrndSocketId}`).emit("msg" , {msgs , thatFrndSocketId , sendersUsername , loginUserMongoId , thatFrndMongoId  , frndUsername , time  })
 
         // socket.emit("private_msg" , {msgs , thatFrndSocketId})  
         console.log(msgs);

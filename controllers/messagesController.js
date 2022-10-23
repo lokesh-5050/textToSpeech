@@ -18,7 +18,8 @@ exports.allMessages = async (req, res, next) => {
 
         byMe:msg.sender.toString() === fromId,
         
-        message:msg.message
+        message:msg.message,
+        time:msg.time
     }  
     
   })
