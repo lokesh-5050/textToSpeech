@@ -194,27 +194,52 @@
       thisNameDiv.style.zIndex =  "99999";
       chat_interfaces.style.right = "30%"
 
+      // //trying to retrive previous msg from daba baseeoooo
+      // const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
+      // console.log(MessagesOfTwoUser);
+      // var fetchMsgs = 0
+      // if(fetchMsgs === 0){
+      //   MessagesOfTwoUser.data.forEach(retMsg => {
+      //     let appendRetMsg = document.querySelector(`#${thisName} .texts`)
+      //     if(retMsg.byMe === true){
+      //       appendRetMsg.innerHTML += `<div class="text sentMsg">
+      //         <h5>${retMsg.message}</h5> <br>
+      //       <small>${retMsg.time}</small>
+      //       </div>`
+      //     }else if(retMsg.byMe === false){
+      //       appendRetMsg.innerHTML += `<div class="text recieveMsg">
+      //         <h5>${retMsg.message}</h5><br>
+      //       <small>${retMsg.time}</small>
+      //       </div>`
+      //     }
+      //   })
+      //   fetchMsgs++
+      // }else if(fetchMsgs == 1){}
+
+
+      //tring for loop for avoiding the same msg retriving twice
       //trying to retrive previous msg from daba baseeoooo
-      const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
-      console.log(MessagesOfTwoUser);
-      var fetchMsgs = 0
-      if(fetchMsgs == 0){
-        MessagesOfTwoUser.data.forEach(retMsg => {
-          let appendRetMsg = document.querySelector(`#${thisName} .texts`)
-          if(retMsg.byMe === true){
-            appendRetMsg.innerHTML += `<div class="text sentMsg">
-              <h5>${retMsg.message}</h5> <br>
-            <small>${retMsg.time}</small>
-            </div>`
-          }else if(retMsg.byMe === false){
-            appendRetMsg.innerHTML += `<div class="text recieveMsg">
-              <h5>${retMsg.message}</h5><br>
-            <small>${retMsg.time}</small>
-            </div>`
-          }
-        })
-        fetchMsgs++
-      }else if(fetchMsgs == 1){}
+      // const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
+      // console.log(MessagesOfTwoUser);
+      // for (let i = 0; i < 1; i++) {
+      //   MessagesOfTwoUser.data.forEach(retMsg => {
+      //     let appendRetMsg = document.querySelector(`#${thisName} .texts`)
+      //     if(retMsg.byMe === true){
+      //       appendRetMsg.innerHTML += `<div class="text sentMsg">
+      //         <h5>${retMsg.message}</h5> <br>
+      //       <small>${retMsg.time}</small>
+      //       </div>`
+      //     }else if(retMsg.byMe === false){
+      //       appendRetMsg.innerHTML += `<div class="text recieveMsg">
+      //         <h5>${retMsg.message}</h5><br>
+      //       <small>${retMsg.time}</small>
+      //       </div>`
+      //     }
+      //   })
+      // }
+
+      // HEHEHEH above didn't work 😂😂
+        
 
 
 
