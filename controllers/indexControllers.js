@@ -30,6 +30,17 @@ exports.userCreation = async (req, res, next) => {
 })),
   function (req, res, next) {};
 
+// Api fnc of logOut
+
+exports.logOut = (req,res,next) => {
+  req.logout(function(err){
+      if(err) throw err
+      res.redirect("/")
+  })
+}
+
+
+
 //Api func of chats page
 exports.chatsPage = async(req, res, next) => {
   const loggedInUser = await userModel.findOne({_id:req.user._id})

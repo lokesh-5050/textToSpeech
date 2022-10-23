@@ -22,6 +22,7 @@
     <div class="left_section">
       <h4 id="userId"><%= user._id %></h4>
       <h4 id="userName"><%= user.username %></h4>
+      <a href="/logout"><small>Logout</small></a>
       <%# include ../views/partials/chatfooter.ejs %>
 
         <div id="side_menu">
@@ -146,51 +147,7 @@
     chat_interfaces.innerHTML = chatInterface;
   });
 
-  //private msg setup id and all
-  // var whole_frnds_section = document.querySelector(".chats_with");
-  // const right_section = document.querySelector("#right_section");
-  // const frnd_name = document.querySelector("#frnd_name");
-  // whole_frnds_section.addEventListener("click", (e) => {
-  //   console.log(e);
-  //   right_section.style.display = "initial";
-  //   let friendName = e.target.innerHTML;
-  //   frnd_name.innerHTML = friendName;
-  // });
-
-  // //checking for getting id with realtime names
-  // let oh_demoOnlineUsers = document.getElementById("oh_demoOnlineUsers")
-  // oh_demoOnlineUsers.addEventListener("click" , (e)=>{
-  //   // console.log(e.target.offsetParent.childNodes[2].data);
-  //   console.log(e);
-  // })
-
-  //sending message to frnd
-
-    
-
-  // send_msg_form.addEventListener("submit", (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  //   var loginUserMongoId = document.querySelector("#userId").innerHTML;
-  //   var frndMongo_Name = document.querySelector("#frnd_name").innerHTML;
-  //   const type_msg = document.querySelector("#type_msg").value;
-  //   console.log(type_msg);
-
-  //   //sending msg to this friend
-  //   socket.emit("private_msg", {
-  //     type_msg,
-  //     frndMongo_Name,
-  //     loginUserMongoId,
-  //   });
-  //   console.log("not sub");
-  // });
-
-  //receiving private_msg from server in client side
-  // socket.on("private_msg" , (data)=>{
-  //   console.log(data);
-  //   var all_chats_content = document.querySelector(".all_chats_content")
-  //   all_chats_content.innerHTML += ` <div class="msg">${data.msgs}</div>`
-  // })
+  
 
   var test = document.getElementById("test");
 
@@ -205,9 +162,6 @@
     console.log(data + "[][haa bhai me hi hu");
     var msg = data.msgs;
     var sendersUsername = data.sendersUsername;
-    // let frndSocketId = data.thatFrndSocketId;
-    // let frnd_id = document.getElementById("frnd_id");
-    // test.innerHTML += `<div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg">from:${sendersUsername} <br> ${msg}</div>`;
   });
 
   //showing the user his message that he just sent

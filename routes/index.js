@@ -10,6 +10,7 @@ passport.use(
 const {
   userCreation,
   passport_authenticate,
+  logOut,
   chatsPage,
   signupPage,
   checkOnlineUsers
@@ -34,6 +35,9 @@ router.post("/create", userCreation);
 
 // API OF loginCheck
 router.post("/login", passport_authenticate);
+
+// API OF logOut
+router.get("/logout", logOut);
 
 // API OF chats Page
 router.get("/chats", isLoggedIn ,chatsPage);
