@@ -1,5 +1,4 @@
 const gTTS = require('gtts');
-      
 var speech = 'Welcome to GeeksforGeeks';
 var gtts = new gTTS(speech, 'en');
   
