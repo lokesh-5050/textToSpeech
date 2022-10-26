@@ -1,134 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/showchats.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="../stylesheets/showchats.css" />
-</head>
-
-<body>
-  <div id="main">
-    <div style="
+  <body>
+    <div id="main">
+      <div
+        style="
           min-width: 30vmax;
           height: 53vmax;
           background-color: rgb(255, 255, 255);
           position: absolute;
           right: 0%;
-          overflow-y: auto;padding: 1vmax 1vmax;" class="chat_interfaces"></div>
+          overflow-y: auto;
+          padding: 1vmax 1vmax;
+        "
+        class="chat_interfaces"
+      ></div>
 
-    <div class="left_section">
-      <h4 id="userId"><%= user._id %></h4>
-      <h4 id="userName"><%= user.username %></h4>
-      <a href="/logout"><small>Logout</small></a>
-      <%# include ../views/partials/chatfooter.ejs %>
+      <div class="left_section">
+        <h4 id="userId"><%= user._id %></h4>
+        <h4 id="userName"><%= user.username %></h4>
+        <a href="/logout"><small>Logout</small></a>
+        <%# include ../views/partials/chatfooter.ejs %>
 
         <div id="side_menu">
           <h1 id="remove">X</h1>
         </div>
+        <!-- <video controls autoplay>
+          <source src="https://translate.google.com/translate_tts?ie=UTF-8&q=hi%20lokesh%20how%20are%20you&tl=en&total=1&idx=0&textlen=21&client=tw-ob&prev=input&ttsspeed=1" rel="noreferrer" type="audio/mpeg">
+        </video>
+         -->
 
         <!-- search bar form -->
         <form id="serach_bar_form" action="">
-          <input type="text" id="search_bar" value="Search or start a new chat" />
+          <input
+            type="text"
+            id="search_bar"
+            value="Search or start a new chat"
+          />
           <img class="search_icon" src="../images/searchnormal1.png" alt="" />
         </form>
         <h4>online Users <span id="onlineusers"></span></h4>
 
         <div class="chats_with"></div>
-    </div>
+      </div>
 
-    <!-- showing online users Real-time -->
-    <div id="oh_demoOnlineUsers" style="
+      <!-- showing online users Real-time -->
+      <div
+        id="oh_demoOnlineUsers"
+        style="
           width: 20vmax;
           height: 20vmax;
           position: absolute;
           bottom: 2vmax;
           right: 30%;
           background-color: rgb(192, 115, 87);
-          z-index: 99999999;display: none;
-        "></div>
+          z-index: 99999999;
+          display: none;
+        "
+      ></div>
 
-    <div style="width: 20vmax;height: 20vmax;background-color: skyblue;
+      <div
+        style="
+          width: 20vmax;
+          height: 20vmax;
+          background-color: skyblue;
           position: absolute;
           right: 30%;
           top: 20%;
           display: flex;
           flex-direction: column;
-          gap: 1vmax;display: none;" id="test">
-      <!-- 
+          gap: 1vmax;
+          display: none;
+        "
+        id="test"
+      >
+        <!-- 
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div>
       <div style="width: 100%;min-height:2vmax ;background-color: yellow;" class="msgg"></div> -->
-    </div>
-
-    <div style="display: none" id="right_section" class="left_section">
-      <div class="right_chat_footer">
-        <img class="frnd_dp" src="" alt="" />
-        <div class="frnd_name">
-          <h4 id="frnd_name"></h4>
-          <lead>online</lead>
-        </div>
-        <img class="chat_search" src="../images/searchnormal1.png" alt="" />
       </div>
 
-      <div class="all_chats_content"></div>
+      <div style="display: none" id="right_section" class="left_section">
+        <div class="right_chat_footer">
+          <img class="frnd_dp" src="" alt="" />
+          <div class="frnd_name">
+            <h4 id="frnd_name"></h4>
+            <lead>online</lead>
+          </div>
+          <img class="chat_search" src="../images/searchnormal1.png" alt="" />
+        </div>
 
-      <!-- send msg form -->
-     
+        <div class="all_chats_content"></div>
+
+        <!-- send msg form -->
+      </div>
     </div>
-  </div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-  integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"
-  integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
-  integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../javascripts/showchats.js"></script>
-<script>
-  var socket = io();
-  var userName = "";
-  var userId = "";
-  var username = document.getElementById("userName").innerHTML;
-  var userid = document.getElementById("userId").innerHTML;
-  // console.log(username);
-  userName = username;
-  userId = userid;
-  // console.log(userName + "../loggedInUser");
-  // console.log(userId + "../loggedInUser");
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"
+    integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
+    integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="../javascripts/showchats.js"></script>
+  <script>
+    var socket = io();
+    var userName = "";
+    var userId = "";
+    var username = document.getElementById("userName").innerHTML;
+    var userid = document.getElementById("userId").innerHTML;
+    // console.log(username);
+    userName = username;
+    userId = userid;
+    // console.log(userName + "../loggedInUser");
+    // console.log(userId + "../loggedInUser");
 
-  socket.emit("connected_userId", { userId, userName });
+    socket.emit("connected_userId", { userId, userName });
 
-  //listening online users
-  var onlineusers = document.querySelector("#onlineusers");
-  socket.on("online_users", (data) => {
-    console.log(data.usernameFromMongo);
-    onlineusers.innerHTML = data.socketId.length;
-    let chats_with = document.querySelector(".chats_with");
-    let thisOnlineUsers = "";
-    data.usernameFromMongo.forEach((user) => {
-      if(document.querySelector("#userName").innerHTML == `${user}`){}else{
-
-        thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`;
-      }
+    //listening online users
+    var onlineusers = document.querySelector("#onlineusers");
+    socket.on("online_users", (data) => {
+      console.log(data.usernameFromMongo);
+      onlineusers.innerHTML = data.socketId.length;
+      let chats_with = document.querySelector(".chats_with");
+      let thisOnlineUsers = "";
+      data.usernameFromMongo.forEach((user) => {
+        if (document.querySelector("#userName").innerHTML == `${user}`) {
+        } else {
+          thisOnlineUsers += `<div class="on_user" style="width: 100%;min-height: 2vmax;background-color: rgb(131, 182, 197);">${user}</div>`;
+        }
+      });
+      chats_with.innerHTML = thisOnlineUsers;
     });
-    chats_with.innerHTML = thisOnlineUsers;
-  });
 
-  // creating a div as many online users
-  
-  var chat_interfaces = document.querySelector(".chat_interfaces");
-  socket.on("online_users", (data) => {
-    console.log(data.usernameFromMongo);
-    let chatInterface = "";
-    data.usernameFromMongo.forEach((user) => {
-      if(document.querySelector("#userName").innerHTML == `${user}`){}else{
+    // creating a div as many online users
 
-        chatInterface += `<div style="max-width: 20vmax;height: 30vmax;background-color: palegreen;position: relative;display: none;" id="${user}" class="interface">
+    var chat_interfaces = document.querySelector(".chat_interfaces");
+    socket.on("online_users", (data) => {
+      console.log(data.usernameFromMongo);
+      let chatInterface = "";
+      data.usernameFromMongo.forEach((user) => {
+        if (document.querySelector("#userName").innerHTML == `${user}`) {
+        } else {
+          chatInterface += `<div style="max-width: 20vmax;height: 30vmax;background-color: palegreen;position: relative;display: none;" id="${user}" class="interface">
           <h4 id="thisFrndName">${user}</h4>
           <div style="max-width: 100%;height: 85%;background-color: red;margin-top: 1vmax;display: flex;flex-direction: column;gap: 1vmax;" class="texts">
             
@@ -142,57 +178,67 @@
         <img class="send_msg" src="../images/send.png" alt="" />
       </form>                                       
         </div>`;
-      }
+        }
+      });
+      chat_interfaces.innerHTML = chatInterface;
     });
-    chat_interfaces.innerHTML = chatInterface;
-  });
 
-  
+    var test = document.getElementById("test");
 
-  var test = document.getElementById("test");
-
-  socket.on("msg", function (data) {
-    var thisChatInterface = document.querySelector(
-      `#${data.sendersUsername} .texts `
-    );
-    thisChatInterface.innerHTML += `<div class="text recieveMsg">
+    socket.on("msg", function (data) {
+      var thisChatInterface = document.querySelector(
+        `#${data.sendersUsername} .texts `
+      );
+      thisChatInterface.innerHTML += `<div class="text recieveMsg">
           <h5>${data.msgs}</h5><br>
             <small>${data.time}</small>
           </div>`;
-    console.log(data + "[][haa bhai me hi hu");
-    var msg = data.msgs;
-    var sendersUsername = data.sendersUsername;
-  });
+      console.log(data + "[][haa bhai me hi hu");
+      var msg = data.msgs;
+      var sendersUsername = data.sendersUsername;
+    });
 
-  //showing the user his message that he just sent
-  socket.on("you_sent_this_msg", async (data) => {
-    var myChatWithHim = document.querySelector(`#${data.frndUsername} .texts`);
-    myChatWithHim.innerHTML += `<div class="text sentMsg">
+    //showing the user his message that he just sent
+    socket.on("you_sent_this_msg", async (data) => {
+      var myChatWithHim = document.querySelector(
+        `#${data.frndUsername} .texts`
+      );
+
+      myChatWithHim.innerHTML += `<div id="msgThread" class="text sentMsg">
             <h5>${data.sentMessage}</h5> <br>
             <small>${data.time}</small>
+            <div class="options"><i class="ri-more-2-fill"></i></div>
+            <div style="display:none" class="speaker"><i  class="ri-volume-down-line"></i></div>
           </div>`;
-  });
 
-  //welcome
-  socket.on("welcome", function (data) {
-    console.log(data);
-  });
+      myChatWithHim.addEventListener("click", (e) => {
+        if (e.target.className == "ri-more-2-fill") {
+          if()
+          let speaker = document.querySelector(".speaker")
+        }
 
-  //click on specific user to display initial that cht interface
-  let everyOnlineUsers = document.querySelector(".chats_with")
-  everyOnlineUsers.addEventListener("click" , async(e) =>{
-   
+      });
+    });
+
+    //welcome
+    socket.on("welcome", function (data) {
+      console.log(data);
+    });
+
+    //click on specific user to display initial that cht interface
+    let everyOnlineUsers = document.querySelector(".chats_with");
+    everyOnlineUsers.addEventListener("click", async (e) => {
       console.log(e);
-      var thisName = e.target.innerText
+      var thisName = e.target.innerText;
       console.log(thisName + "././diff");
-      let loginUserName = document.querySelector("#userName").innerHTML
-      let loginUserId = document.querySelector("#userId").innerHTML
-      let thisNameDiv = document.querySelector(`#${thisName}`)
-      thisNameDiv.style.display = "initial"
-      let chat_interfaces = document.querySelector(".chat_interfaces")
-      thisNameDiv.style.poisition = "absolute"
-      thisNameDiv.style.zIndex =  "99999";
-      chat_interfaces.style.right = "30%"
+      let loginUserName = document.querySelector("#userName").innerHTML;
+      let loginUserId = document.querySelector("#userId").innerHTML;
+      let thisNameDiv = document.querySelector(`#${thisName}`);
+      thisNameDiv.style.display = "initial";
+      let chat_interfaces = document.querySelector(".chat_interfaces");
+      thisNameDiv.style.poisition = "absolute";
+      thisNameDiv.style.zIndex = "99999";
+      chat_interfaces.style.right = "30%";
 
       // //trying to retrive previous msg from daba baseeoooo
       // const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
@@ -216,7 +262,6 @@
       //   fetchMsgs++
       // }else if(fetchMsgs == 1){}
 
-
       //tring for loop for avoiding the same msg retriving twice
       //trying to retrive previous msg from daba baseeoooo
       // const MessagesOfTwoUser = await axios.get(`/allMessages/${thisName}/${loginUserName}/${loginUserId}`)
@@ -239,56 +284,43 @@
       // }
 
       // HEHEHEH above didn't work 😂😂
-        
 
+      const ownerMongoId = document.querySelector("#userId").innerHTML;
+      let this_div_form = document.querySelector(`#${thisName} .send_msg_form`);
+      let msg_input = document.querySelector(`#${thisName} #type_msg`);
 
+      let send_icon = document.querySelector(`#${thisName} .send_msg`);
+      let send = document.querySelector(`#${thisName} #sendThisMsg`);
 
-      const ownerMongoId = document.querySelector("#userId").innerHTML
-      let this_div_form = document.querySelector(`#${thisName} .send_msg_form`)
-      let msg_input = document.querySelector(`#${thisName} #type_msg`)
-      
-      let send_icon = document.querySelector(`#${thisName} .send_msg`)
-      let send = document.querySelector(`#${thisName} #sendThisMsg`)
-  
-      let img_select_icon = document.querySelector(`#${thisName} .upload_opt`)
-      let open_img_choose_options = document.querySelector(`#${thisName} #choose_files`)
-  
+      let img_select_icon = document.querySelector(`#${thisName} .upload_opt`);
+      let open_img_choose_options = document.querySelector(
+        `#${thisName} #choose_files`
+      );
+
       //to send msg through icon
-      send_icon.addEventListener("click" , (e) =>{
-        send.click()
+      send_icon.addEventListener("click", (e) => {
+        send.click();
         console.log("not_send");
-      })
-  
-      img_select_icon.addEventListener("click" , (e) =>{
-        open_img_choose_options.click()
-      })
+      });
 
-      this_div_form.addEventListener("submit" , (e)=> {
-        e.preventDefault()
-        let frndMongo_Name = thisName
-        let type_msg = msg_input.value
-        msg_input.value = ""
-        let loginUserMongoId = ownerMongoId
-        socket.emit("private_msg" , {frndMongo_Name , type_msg , loginUserMongoId })})
-  })
+      img_select_icon.addEventListener("click", (e) => {
+        open_img_choose_options.click();
+      });
 
-  // function t2s(){
+      this_div_form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let frndMongo_Name = thisName;
+        let type_msg = msg_input.value;
+        msg_input.value = "";
+        let loginUserMongoId = ownerMongoId;
+        socket.emit("private_msg", {
+          frndMongo_Name,
+          type_msg,
+          loginUserMongoId,
+        });
+      });
+    });
 
-  //   const AudioContext = window.AudioContext  //|| window.webkitAudioContext
-  //   var audioCtx = new AudioContext()
-  
-  //   var audioFile = fetch("https://translate.google.com/translate_tts?ie=UTF-8&q=hello%20lokesh&tl=en&total=1&idx=0&textlen=12&client=tw-ob&prev=input&ttsspeed=1").then(response => response.arrayBuffer()).then(buffer => audioCtx.decodeAudioData(buffer)).then(buffer =>{
-  //     var track = audioCtx.createBufferSource()
-  //     track.buffer = buffer
-  //     track.connect(audioCtx.destination)
-  //     track.start(0)
-  //   })
-  
-  //   axios.get("https://translate.google.com/translate_tts?ie=UTF-8&q=hello%20lokesh&tl=en&total=1&idx=0&textlen=12&client=tw-ob&prev=input&ttsspeed=1")
-  
-  //   console.log(audioFile);
-  // }t2s()
-
-</script>
-
+    //using Text-To-Speech
+  </script>
 </html>

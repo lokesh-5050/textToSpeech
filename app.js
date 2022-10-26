@@ -19,7 +19,7 @@ var socketapi =  require("./socket/socketapi");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(cors({ origin: process.env.DOMAIN }))
+app.use(cors({ origin: process.env.DOMAIN , credentials:true}))
 app.use(expressSession({
   resave:false,
   saveUninitialized:false,
