@@ -15,6 +15,7 @@ const {
   chatsPage,
   signupPage,
   checkOnlineUsers,
+  sayThisMsg
   // getSpeech
 } = require("../controllers/indexControllers");
 
@@ -50,27 +51,6 @@ router.get(
   allMessages
 );
 
-// router.get("/getSpeech", (req, res, next) => {
-//   requests("https://translate.google.com/translate_tts?ie=UTF-8&q=hi%20lokesh%20how%20are%20you&tl=en&total=1&idx=0&textlen=21&client=tw-ob&prev=input&ttsspeed=1")
-//     .on("data", function (chunk) {
-//       console.log(chunk);
-//     })
-//     .on("end", function (err) {
-//       if (err) return console.log("connection closed due to errors", err);
-
-//       console.log("end");
-//     });
-//   // requests(
-//   //   {
-//   //     url: "https://translate.google.com/translate_tts?ie=UTF-8&q=hi%20lokesh%20how%20are%20you&tl=en&total=1&idx=0&textlen=21&client=tw-ob&prev=input&ttsspeed=1",
-//   //   },
-//   //   (error, response, body) => {
-//   //     if (error || response.statusCode !== 200) {
-//   //       return res.status(500).json({ type: "error", message: error.message });
-//   //     }
-//   //     res.json(body);
-//   //   }
-//   // );
-// });
+router.get("/say/:sayThisMsg" , sayThisMsg)
 
 module.exports = router;

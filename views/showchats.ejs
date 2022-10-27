@@ -203,18 +203,15 @@
       var myChatWithHim = document.querySelector(
         `#${data.frndUsername} .texts`
       );
-
-      myChatWithHim.innerHTML += `<div id="msgThread" class="text sentMsg">
-            <h5>${data.sentMessage}</h5> <br>
-            <small>${data.time}</small>
-            <div class="options"><i class="ri-more-2-fill"></i></div>
-            <div style="display:none" class="speaker"><i  class="ri-volume-down-line"></i></div>
-          </div>`;
-
-      myChatWithHim.addEventListener("click", (e) => {
-        if (e.target.className == "ri-more-2-fill") {
-          if()
-          let speaker = document.querySelector(".speaker")
+ // <div class="options"><i class="ri-more-2-fill"></i></div>
+      myChatWithHim.innerHTML += `<div id="msgThread" class="text sentMsg"><h5>${data.sentMessage}</h5><small>${data.time}</small><div  class="speaker"><i  class="ri-volume-down-line"></i></div></div>`;
+       myChatWithHim.addEventListener("click", async(e) => {
+        console.log(e);
+        // var speaker = document.querySelector(".speaker")
+        if (e.target.className == "ri-volume-down-line") {
+          var sayThisMsg = e.target.parentElement.parentElement.children[0].innerHTML
+          const said = await axios.get(`/say/${sayThisMsg}`)
+          console.log(said);
         }
 
       });

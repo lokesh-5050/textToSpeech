@@ -2,8 +2,7 @@ const passport = require("passport");
 const userModel = require("../models/users");
 const io = require("socket.io");
 const mongoose = require("mongoose");
-const Gtts_api = require("google-tts-api");
-const playAudioURL = require("play-audio-url");
+const say = require("say")
 //userCreation API function
 exports.userCreation = async (req, res, next) => {
   const newUser = new userModel({
@@ -50,9 +49,9 @@ exports.chatsPage = async (req, res, next) => {
   // })
   // // console.log(url);
 
-  const url = Gtts_api.getAudioUrl("hi lokesh how are you" , {lang:'en'})
+  // const url = Gtts_api.getAudioUrl("hi lokesh how are you" , {lang:'en'})
 
-  console.log(url);
+  // console.log(url);
   
  
 
@@ -78,6 +77,10 @@ exports.signupPage = (req, res, next) => {
 // }
 
 
-// exports.getSpeech = async(req,res,next)=>{
- 
-// }
+exports.sayThisMsg = async(req,res,next)=>{
+  const sayThis = req.params.sayThisMsg
+
+  var voice = say.speak(sayThis , 'Alex' , 1)
+
+  res.json(voice)
+}
