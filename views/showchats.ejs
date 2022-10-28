@@ -166,7 +166,7 @@
         } else {
           chatInterface += `<div style="max-width: 20vmax;height: 30vmax;background-color: palegreen;position: relative;display: none;" id="${user}" class="interface">
           <h4 id="thisFrndName">${user}</h4>
-          <div style="max-width: 100%;height: 85%;background-color: red;margin-top: 1vmax;display: flex;flex-direction: column;gap: 1vmax;" class="texts">
+          <div style="max-width: 100%;height: 85%;background-color: red;margin-top: 1vmax;display: flex;flex-direction: column;gap: 1vmax; overflow-y: scroll;" class="texts">
             
             
           </div>
@@ -190,12 +190,19 @@
         `#${data.sendersUsername} .texts `
       );
       thisChatInterface.innerHTML += `<div class="text recieveMsg">
-          <h5>${data.msgs}</h5><br>
+          <h5>${data.msgs}</h5>
             <small>${data.time}</small>
+            <div  class="speaker"><i  class="ri-volume-down-line"></i></div>
           </div>`;
-      console.log(data + "[][haa bhai me hi hu");
-      var msg = data.msgs;
-      var sendersUsername = data.sendersUsername;
+
+          thisChatInterface.addEventListener("click" , async(f)=>{
+            console.log(f);
+            if(f.target.className == "ri-volume-down-line"){
+              let toldThis = f.target.parentElement.parentElement.children[0].innerHTML
+              axios.get(`/say/${toldThis}`)
+            }
+          })
+      
     });
 
     //showing the user his message that he just sent
@@ -246,13 +253,15 @@
           let appendRetMsg = document.querySelector(`#${thisName} .texts`)
           if(retMsg.byMe === true){
             appendRetMsg.innerHTML += `<div class="text sentMsg">
-              <h5>${retMsg.message}</h5> <br>
+              <h5>${retMsg.message}</h5>
             <small>${retMsg.time}</small>
+            <div  class="speaker"><i  class="ri-volume-down-line"></i></div>
             </div>`
           }else if(retMsg.byMe === false){
             appendRetMsg.innerHTML += `<div class="text recieveMsg">
-              <h5>${retMsg.message}</h5><br>
+              <h5>${retMsg.message}</h5>
             <small>${retMsg.time}</small>
+            <div  class="speaker"><i  class="ri-volume-down-line"></i></div>
             </div>`
           }
         })
@@ -310,11 +319,14 @@
         let type_msg = msg_input.value;
         msg_input.value = "";
         let loginUserMongoId = ownerMongoId;
-        socket.emit("private_msg", {
-          frndMongo_Name,
-          type_msg,
-          loginUserMongoId,
-        });
+        if(type_msg.length > 0){
+
+          socket.emit("private_msg", {
+            frndMongo_Name,
+            type_msg,
+            loginUserMongoId,
+          });
+        }
       });
     });
 

@@ -210,14 +210,14 @@ body {
 .recieveMsg{
   max-width: 14vmax;
   word-wrap: break-word;
-  min-height: 2vmax;
+  height: fit-content;
   background-color: skyblue;
   margin-left: 0%;
 }
 .sentMsg{
   max-width: 14vmax;
   word-wrap: break-word;
-  min-height: 2vmax;
+  height: fit-content;
   margin-left: 17vmax;
   background-color: skyblue;
   text-align: left;
