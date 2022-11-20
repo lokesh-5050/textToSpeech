@@ -233,11 +233,13 @@
     let everyOnlineUsers = document.querySelector(".chats_with");
     everyOnlineUsers.addEventListener("click", async (e) => {
       console.log(e);
+      document.querySelector(".interface").style.display ="none"
       var thisName = e.target.innerText;
       console.log(thisName + "././diff");
       let loginUserName = document.querySelector("#userName").innerHTML;
       let loginUserId = document.querySelector("#userId").innerHTML;
       let thisNameDiv = document.querySelector(`#${thisName}`);
+      console.log(thisNameDiv);
       thisNameDiv.style.display = "initial";
       let chat_interfaces = document.querySelector(".chat_interfaces");
       thisNameDiv.style.poisition = "absolute";

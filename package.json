@@ -22,7 +22,7 @@
     "gtts": "^0.2.1",
     "http-errors": "~1.6.3",
     "moment": "^2.29.4",
-    "mongoose": "^6.6.5",
+    "mongoose": "^6.7.0",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "~1.9.1",
     "passport": "^0.6.0",
@@ -34,6 +34,7 @@
     "play-audio-url": "^1.0.1",
     "requests": "^0.3.0",
     "say": "^0.16.0",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "uninstall": "^0.0.0"
   }
 }
